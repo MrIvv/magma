@@ -60,6 +60,23 @@ export class MdsInputField {
     this.appliedName = this.label;
   };
 
+  // the label is not a `<label for>` (see above), so the click a native label turns into the focus
+  // of its control is written here: the first slotted control takes it, through `setFocus()` when
+  // it has one (the native input of an `mds-input` is in its shadow root, out of reach of
+  // `focus()` on the host), unless it is disabled, which a native label leaves alone as well. The
+  // label holds only text: no interactive element of its own to leave the click to
+  private readonly focusSlottedControl = (): void => {
+    const control = this.slotInput?.assignedElements()[0] as
+      | (HTMLElement & { disabled?: boolean; setFocus?: () => Promise<void> })
+      | undefined;
+    if (control == null || control.disabled === true || control.hasAttribute('disabled')) return;
+    if (typeof control.setFocus === 'function') {
+      void control.setFocus();
+      return;
+    }
+    control.focus();
+  };
+
   componentDidLoad(): void {
     this.nameSlottedControls();
     const [mdsInput] = this.slotInput.assignedElements() as HTMLMdsInputElement[];
@@ -115,12 +132,12 @@ export class MdsInputField {
         {icon !== undefined && icon !== '' ? (
           <div class="label-row">
             <mds-icon aria-hidden="true" class="label-icon" name={icon} />
-            <mds-text class="label" typography="label">
+            <mds-text class="label" typography="label" onClick={this.focusSlottedControl}>
               {this.label}
             </mds-text>
           </div>
         ) : (
-          <mds-text class="label" typography="label">
+          <mds-text class="label" typography="label" onClick={this.focusSlottedControl}>
             {this.label}
           </mds-text>
         )}

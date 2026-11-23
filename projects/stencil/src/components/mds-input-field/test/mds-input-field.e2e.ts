@@ -173,6 +173,40 @@ describe('mds-input-field', () => {
     });
   });
 
+  // #1503: a native label moves the focus to its control when clicked
+  describe('click on the label', () => {
+    it('focuses the slotted mds-input', async () => {
+      const { mdsInput, label } = await setup(
+        '<mds-input-field label="Nome"><mds-input></mds-input></mds-input-field>',
+      );
+
+      await userEvent.click(label);
+
+      expect(document.activeElement).toBe(mdsInput);
+      expect(mdsInput.shadowRoot!.activeElement).toBe(mdsInput.shadowRoot!.querySelector('input'));
+    });
+
+    it('focuses a slotted control that has no setFocus()', async () => {
+      const { element, label } = await setup(
+        '<mds-input-field label="Nome"><input name="nome" /></mds-input-field>',
+      );
+
+      await userEvent.click(label);
+
+      expect(document.activeElement).toBe(element.querySelector('input'));
+    });
+
+    it('leaves a disabled control alone, as a native label does', async () => {
+      const { mdsInput, label } = await setup(
+        '<mds-input-field label="Nome"><mds-input disabled></mds-input></mds-input-field>',
+      );
+
+      await userEvent.click(label);
+
+      expect(document.activeElement).not.toBe(mdsInput);
+    });
+  });
+
   // #1189 rhythm/label-control
   it('stands its label 12px from its control', async () => {
     const { mdsInput, label } = await setup(
