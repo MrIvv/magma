@@ -61,17 +61,24 @@ export class MdsInputField {
   };
 
   // the label is not a `<label for>` (see above), so the click a native label turns into the focus
-  // of its control is written here: the first slotted control takes it, through `setFocus()` when
-  // it has one (the native input of an `mds-input` is in its shadow root, out of reach of
-  // `focus()` on the host), unless it is disabled, which a native label leaves alone as well. The
-  // label holds only text: no interactive element of its own to leave the click to
+  // of its control is written here: the first slotted control takes it, through the method that
+  // reaches its native input when it has one (in its shadow root, out of reach of `focus()` on a
+  // host that does not delegate it: `setFocus()` of `mds-input`, `focusInput()` of
+  // `mds-input-date`), unless it is disabled, which a native label leaves alone as well. `:disabled`
+  // matches the `disabled` of a native control and of a form-associated one (both reflect it), and
+  // the `<fieldset disabled>` around either. The label holds only text: no interactive element of
+  // its own to leave the click to
   private readonly focusSlottedControl = (): void => {
     const control = this.slotInput?.assignedElements()[0] as
-      | (HTMLElement & { disabled?: boolean; setFocus?: () => Promise<void> })
+      | (HTMLElement & { focusInput?: () => Promise<void>; setFocus?: () => Promise<void> })
       | undefined;
-    if (control == null || control.disabled === true || control.hasAttribute('disabled')) return;
+    if (control == null || control.matches(':disabled')) return;
     if (typeof control.setFocus === 'function') {
       void control.setFocus();
+      return;
+    }
+    if (typeof control.focusInput === 'function') {
+      void control.focusInput();
       return;
     }
     control.focus();
