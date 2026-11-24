@@ -280,7 +280,13 @@ answer comes from".
   narrow width: the image holds a slice of it at most, and the page where the rest would be), a
   console error or an uncaught exception, a request the page cannot be served, a font family the
   text asks for with no face loaded, a word (the run between two places a line may break: a
-  space, a hyphen, a dash, a slash) on more than one line, content taller than the image. An
+  space, a hyphen, a dash, a slash) on more than one line, content taller than the image. A
+  prototype is none of these (#1492): the markup that stands in for a component proposed to
+  Magma, marked `data-prototype="<tag>"`, is named in `prototypes` of the answer, so the agent
+  says which part of the image is a proposal; it is a problem when its tag is a component the
+  loader defined (`prototype-shipped`: the component ships, write it) or not the name of a
+  custom element (`prototype-unnamed`). The maintainer chose the marker on plain markup over the
+  proposed tag itself, an unknown element with no shadow tree, styled by hand. An
   image is at most 2000 px a side, the cap of Claude Code (CHANGELOG 2.1.122) and of the
   Anthropic API for a request with many images, and four of them stay under the 25,000 tokens
   Claude Code allows a tool result. The driver is the
@@ -363,7 +369,12 @@ nothing for a well-formed question, or a tool that says it does not know, carrie
 (`GAP` of `src/context.ts`), and the instructions of the server tell the agent, then,
 to propose an issue on Magma as `agents/reporting.md` describes ("A tool or an answer the
 MCP server is missing"), only with the user's agreement. An input error never carries
-`gap`, and neither does a weak match: the agent judges that one from the instructions.
+`gap`, and neither does a weak match: the agent judges that one from the instructions. A
+component Magma lacks is reported as a proposal (#1492, "A component Magma lacks" of the same
+guide): its API and a prototype the person has seen rendered, which the issue carries and the
+component, once approved, is scaffolded from (`projects/stencil/SPEC.md`, "Scaffolding a new
+component"); `GAP` and the instructions name that section too, and a test holds every section
+they name to the guide.
 ## Serving the previews
 
 ```bash

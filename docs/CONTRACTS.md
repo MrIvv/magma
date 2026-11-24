@@ -224,7 +224,8 @@ keep in step.
   catalogue `agents/patterns.md` and the preview of each case
   (`agents/patterns/previews/<id>/<case>.html`, of a rule of a domain `<domain>/<rule>.html`, of
   a situation of a block `<block>/<situation>.html`, the other examples of each `<id>.<n>.html`
-  from 2, #1221: the stage, its context marked `data-stage` (#1396), what to try in it, an optional
+  from 2, #1221: the stage, its context marked `data-stage` (#1396), the markup that stands in
+  for a component Magma lacks marked `data-prototype="<tag>"` (#1492), what to try in it, an optional
   height and `whole-page`, a stage with a frame of its own that takes no inset; never a page,
   the reader adds the stylesheets and the loader, compiles its Tailwind classes with the entry
   point of `agents/assets.md`, "Tailwind (optional)" (#1220), and runs it in a document of its

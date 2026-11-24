@@ -276,6 +276,14 @@ try: Press Salva: the error shows above the form, and what was written stays.
   preview, so an agent that reads the markup tells the context from the solution too; it is the
   maintainer's choice on #1396 (2026-11-13), over a wrapper around the solution, which changes
   the layout of the stage and splits when the solution does.
+- **A prototype** (#1492). A component the pattern proposes and Magma lacks is stood in for by
+  markup, in a draft and in the preview of a case that waits on it (`magma-gap`): plain
+  elements and the components Magma has, the outermost one marked with the tag the proposal
+  gives the component, `data-prototype="mds-preview"`. `render_preview` names it in
+  `prototypes` instead of reporting a problem, and reports it (`prototype-shipped`) once the
+  build has the component, so the change that ships the component writes it in the previews.
+  It is the maintainer's choice on #1492 (2026-11-23), over writing the proposed tag itself,
+  an element the page does not know, with no shadow tree, styled by hand.
 - **What to try**, required: one line, what to do in the preview ("Press Salva: ..."), or what
   to look at when there is nothing to do. The page shows it under the stage. A live preview with
   nothing said is a still form; the maintainer chose the line and no animation (#1186).
@@ -384,6 +392,16 @@ under an id Magma has; it holds to the format, the cases and the components as M
 to the lint rules (a product may name rules of its own) nor to the generated body (the
 generator does not ship). A pattern that comes back in the layers of two or three products is
 proposed for the default.
+
+The rule of the method holds in a product too: nothing of a layer or of a pattern of the
+product is written before the person has seen it rendered (`render_preview`, on the release
+the product installed), each choice with its options side by side, each case of its own
+pattern as the product writes it. A case of a product that needs a component Magma lacks uses
+a prototype of it, markup marked `data-prototype="<tag>"`, which `render_preview` names in
+`prototypes` instead of reporting it, and reports (`prototype-shipped`) once the release has
+the component; the component is proposed to Magma with its API and the image of the prototype
+(`agents/reporting.md`, "A component Magma lacks"), which becomes the issue a pattern of Magma
+waits on, as a proposal of `/pattern-new` does (#1492).
 
 The products learn the format from the section "A product's layer" of the shipped catalogue
 (`agents/patterns.md`, written by `sync-agent-docs.ts`), and write a layer with the plugin

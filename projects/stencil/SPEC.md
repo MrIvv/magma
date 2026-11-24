@@ -260,6 +260,8 @@ Authoring templates with inline rules and section prompts live in [`template/usa
 
 ## Scaffolding a new component
 
+A new component starts from its approved proposal: the issue that says its intent, why no component holds the role, its API (props, slots, events), what it is built on and its accessibility, with the prototype the maintainer saw rendered (#1492). A proposal comes from `/pattern-new` (a pattern that needs it) or from the agent of a product (`docs/agents/reporting.md`, "A component Magma lacks"). The API of the proposal is the starting point of the props, slots and events; a change to it is said in the issue. The prototype is markup marked `data-prototype="<tag>"`, in the draft or the preview of the case that waits on the component (`magma-gap`): once the build has the component, `render_preview` reports every prototype of it (`prototype-shipped`) and the build of the preview images fails on it, so the change that adds the component writes it in those previews and drops their `magma-gap`.
+
 ```bash
 nx run stencil:generate mds-component-name
 ```

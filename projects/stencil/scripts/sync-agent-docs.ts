@@ -351,8 +351,17 @@ on each situation it adds). A layer with an error is not applied: the answer sta
 default until it is fixed. A need no Magma pattern covers, which the product cannot wait for,
 may get a pattern of its own in the same folder, in the shape of Magma's files (its own
 \`layer\`, no \`extends\`, never an id Magma has); a pattern that comes back in two or three
-products is proposed to Magma. In Claude Code, the Magma plugin writes and checks a layer with
-\`/magma:pattern-layer\`.
+products is proposed to Magma.
+
+Nothing of a layer or of a pattern of the product is written before the person has seen it
+rendered with the real components (\`render_preview\`, \`mcp.md\`, "Show the person what you
+mean"): each open choice as the default and as the value the product would take, side by side,
+each situation as the case it maps to, each case of a pattern of the product as the product
+would write it. The person corrects the render, and sees the correction rendered again. A case
+that needs a component Magma lacks uses a prototype of it meanwhile, markup marked
+\`data-prototype="<the tag you propose>"\`, and the component is proposed to Magma with its API
+and the image of the prototype (\`reporting.md\`, "A component Magma lacks"). In Claude Code,
+the Magma plugin writes and checks a layer with \`/magma:pattern-layer\`.
 `;
 }
 

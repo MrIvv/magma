@@ -186,7 +186,7 @@
     "@maggioli-design-system/svg-icons": "*",
     "@rollup/plugin-alias": "5.1.1",
     "@stencil/angular-output-target": "1.6.0",
-    "@stencil/eslint-plugin": "1.4.1",
+    "@stencil/eslint-plugin": "1.4.2",
     "@stencil/react-output-target": "1.8.1",
     "@stencil/store": "2.2.5",
     "@stencil/vitest": "1.16.2",
